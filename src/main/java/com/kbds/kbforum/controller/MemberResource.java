@@ -13,6 +13,19 @@ import com.kbds.kbforum.domain.subsidiary.Subsidiary;
 import com.kbds.kbforum.domain.subsidiary.SubsidiaryService;
 
 
+
+/**
+ * <pre>
+ * 파일명     : MemberResource.java
+ * 프로젝트  : OJTForum
+ * 날짜        : 2020. 9. 17.
+ * ===============================================================================
+ * 			날짜	      		|    	작성자		 	|			내	용		      |	  
+ * ===============================================================================
+ * 	     2020. 9. 17.       |	        유한솔       	    |      회원CRUD 및 인증 컨트롤러      |	
+ * ===============================================================================
+ * </pre>
+ */
 @Controller
 public class MemberResource {
   @Autowired
