@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import com.kbds.kbforum.domain.authority.AuthorityService;
 import com.kbds.kbforum.domain.member.Member;
 import com.kbds.kbforum.domain.member.MemberService;
 import com.kbds.kbforum.domain.subsidiary.Subsidiary;
@@ -32,17 +33,15 @@ public class MemberResource {
   MemberService memberService;
   @Autowired
   SubsidiaryService subsidiaryService;
+  @Autowired
+  AuthorityService authorityService;
 
 
-  @GetMapping("/register")
-  public ModelAndView registerMember(ModelAndView mv) {
-    mv.setViewName("pages/forum");
-    return mv;
-  }
 
   @PostMapping("/register-processing")
   public ModelAndView registerProcessingMember(ModelAndView mv,
-      @ModelAttribute("member") Member member) {
+      @ModelAttribute("member") Member member, String subsiId) {
+    member.setAuth(authorityService.getAuth("USER"));
     memberService.save(member);
     System.out.println("member registered");
     mv.setViewName("pages/home");
@@ -50,8 +49,10 @@ public class MemberResource {
   }
 
   @GetMapping("/signup")
-  public ModelAndView registerMove(ModelAndView mv) {
-    System.out.println("test");
+  public ModelAndView registerMove(ModelAndView mv, @ModelAttribute("member") Member member,
+      @ModelAttribute("subsiId") String subsiId) {
+    List<Subsidiary> subsiList = subsidiaryService.getAllList();
+    mv.addObject("subsiList", subsiList);
     mv.setViewName("pages/register");
     return mv;
   }
@@ -82,12 +83,7 @@ public class MemberResource {
 
   @GetMapping("/subsiList")
   public ModelAndView subsiList(ModelAndView mv) {
-    List<Subsidiary> subsiList = subsidiaryService.getAllList();
-    System.out.println("subsiList:" + subsiList);
-    for (Subsidiary s : subsiList) {
-      System.out.println(s.toString());
-    }
-    mv.addObject("subsiList", subsiList);
+
     mv.setViewName("pages/login");
     return mv;
   }

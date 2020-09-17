@@ -117,15 +117,17 @@ body {
   <div class="form">
 
    <form class="register-form" action="#" th:action="@{/register-processing}" th:object="${member}" method="post">
-      <input type="text" placeholder="name" th:field="*{memberName}"/>
-      <input type="text" th:field="*{memberName}"/>
+      <input type="text" placeholder="id" th:field="*{memberId}"/>
+     <select th:field="${subsiId}">
+     <option th:each="subsiList : ${subsiList}" th:value="${subsiList.subsiId}" th:text="${subsiList.subsiName}">
+     </option>
+     </select>
       <input type="password" placeholder="password" th:field="*{memberPassword}"/>
-      <input type="text" placeholder="email address" th:field="*{memberEmail}"/>
       <input type="text" placeholder="name" th:field="*{memberName}"/>
       <input type="hidden" th:field="*{memberCreateDate}" value = "today()"/>
-      <input type="hidden" th:field="*{memberUpadateDate}" value = "today()"/>
-      <input type="hidden" th:field="*{memberCreateBy}" value = "test"/>
+      <input type="hidden" th:field="*{memberUpdateDate}" value = "today()"/>
       <input type="hidden" th:field="*{memberUpdateBy}" value = "test"/>
+      <input type="hidden" th:field="*{memberDelete}" value = "N"/>
       <button>create</button>
       <p class="message">Already registered? <a href="/">Sign In</a></p>
     </form> 
@@ -135,7 +137,8 @@ body {
 </body>
 <script>
 var today = ()=> {
-	return Date.now();
+	var todayArr= Date(Date.now()).split(" ",5);
+	return todayArr[3]+"_"+todayArr[1]+"_"+todayArr[0]+"_"+todayArr[4];
 }
 </script>
 </html>
