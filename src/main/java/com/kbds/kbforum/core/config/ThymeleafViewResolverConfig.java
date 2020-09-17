@@ -50,7 +50,7 @@ public class ThymeleafViewResolverConfig {
     resolver.setPrefix("/WEB-INF/templates/");
 
     resolver.setSuffix(".html");
-
+    resolver.setCharacterEncoding("UTF-8");
     resolver.setTemplateMode(TemplateMode.HTML);
     resolver.setCacheable(false);
 

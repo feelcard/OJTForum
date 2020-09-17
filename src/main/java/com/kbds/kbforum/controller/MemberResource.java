@@ -40,8 +40,10 @@ public class MemberResource {
 
   @PostMapping("/register-processing")
   public ModelAndView registerProcessingMember(ModelAndView mv,
-      @ModelAttribute("member") Member member, String subsiId) {
+      @ModelAttribute("member") Member member, String subsiName) {
     member.setAuth(authorityService.getAuth("USER"));
+    System.out.println("subsiname : " + subsiName);
+    member.setSubsi(subsidiaryService.getSubsiByName(subsiName));
     memberService.save(member);
     System.out.println("member registered");
     mv.setViewName("pages/home");
@@ -50,7 +52,7 @@ public class MemberResource {
 
   @GetMapping("/signup")
   public ModelAndView registerMove(ModelAndView mv, @ModelAttribute("member") Member member,
-      @ModelAttribute("subsiId") String subsiId) {
+      @ModelAttribute("subsiName") String subsiName) {
     List<Subsidiary> subsiList = subsidiaryService.getAllList();
     mv.addObject("subsiList", subsiList);
     mv.setViewName("pages/register");
