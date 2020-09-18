@@ -4,7 +4,8 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $('.message a').click(function(){
 	   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
@@ -136,19 +137,14 @@ body {
 			<form class="register-form" action="#"
 				th:action="@{/register-processing}" th:object="${member}"
 				method="post">
-				<input type="text" placeholder="id" th:field="*{memberId}" />
-					<select name="subsiName">
-						<option th:each="subsiList : ${subsiList}"
-							th:value="${subsiList.subsiName}" th:text="${subsiList.subsiName}">
-						</option>
-					</select>
-				<input type="password" placeholder="password"
+				<input type="text" placeholder="id" th:field="*{memberId}" /> <select
+					name="subsiName">
+					<option th:each="subsiList : ${subsiList}"
+						th:value="${subsiList.subsiName}" th:text="${subsiList.subsiName}">
+					</option>
+				</select> <input type="password" placeholder="password"
 					th:field="*{memberPassword}" /> <input type="text"
-					placeholder="name" th:field="*{memberName}" /> <input type="hidden"
-					th:field="*{memberCreateDate}" value="today()" /> <input
-					type="hidden" th:field="*{memberUpdateDate}" value="today()" /> <input
-					type="hidden" th:field="*{memberUpdateBy}" value="test" /> <input
-					type="hidden" th:field="*{memberDelete}" value="N" />
+					placeholder="name" th:field="*{memberName}" />
 				<button>create</button>
 				<p class="message">
 					Already registered? <a href="/">Sign In</a>
@@ -158,10 +154,4 @@ body {
 	</div>
 
 </body>
-<script>
-var today = ()=> {
-	var todayArr= Date(Date.now()).split(" ",5);
-	return todayArr[3]+"_"+todayArr[1]+"_"+todayArr[0]+"_"+todayArr[4];
-}
-</script>
 </html>

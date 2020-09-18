@@ -34,6 +34,7 @@ public class MemberService implements UserDetailsService {
   @Autowired
   MemberRepository memberRepository;
 
+
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Optional<Member> memberEntityWrapper = memberRepository.findByMemberId(username);
@@ -46,14 +47,14 @@ public class MemberService implements UserDetailsService {
   }
 
   @Transactional
-  public String save(Member memberTO) {
+  public void save(Member memberTO) {
     Member member = memberTO;
     member.setMemberCreateDate(LocalDateTime.now().toString());
-
+    member.setMemberDelete("N");
     // 비밀번호 암호화
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     member.setMemberPassword(passwordEncoder.encode(member.getMemberPassword()));
-    return memberRepository.save(member).getMemberId();
+    memberRepository.save(member);
   }
 
 }
