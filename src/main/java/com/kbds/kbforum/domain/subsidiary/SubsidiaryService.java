@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * ===============================================================================
  * 			날짜	      		|    	작성자		|			내	용		         |	  
  * ===============================================================================
- * 	     2020. 9. 17.       |	       유한솔       	|   계열사 Read 기능 구현                       |	
+ * 	     2020. 9. 17.       |	       유한솔       	|       계열사 Read 기능 구현                |	
  * ===============================================================================
  * </pre>
  */
@@ -25,6 +25,7 @@ public class SubsidiaryService {
   SubsidiaryRepository subsidiaryRepository;
 
   public List<Subsidiary> getAllList() {
+
     return subsidiaryRepository.findAll();
 
   }

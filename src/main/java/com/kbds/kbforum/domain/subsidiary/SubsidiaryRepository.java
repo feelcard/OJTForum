@@ -2,8 +2,6 @@ package com.kbds.kbforum.domain.subsidiary;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
-
 /**
  * <pre>
  * 파일명     : SubsidiaryRepository.java
@@ -16,7 +14,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * =======================================================================================
  * </pre>
  */
-
 
 public interface SubsidiaryRepository extends JpaRepository<Subsidiary, String> {
 

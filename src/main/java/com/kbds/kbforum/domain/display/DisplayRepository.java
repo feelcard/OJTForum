@@ -2,8 +2,6 @@ package com.kbds.kbforum.domain.display;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
-
 /**
  * <pre>
  * 파일명     : DisplayRepository.java
@@ -16,7 +14,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * ===============================================================================
  * </pre>
  */
-
 
 public interface DisplayRepository extends JpaRepository<Display, String> {
 

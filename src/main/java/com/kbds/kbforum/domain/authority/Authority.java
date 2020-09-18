@@ -12,8 +12,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
-
 /**
  * <pre>
  * 파일명     : Authority.java
@@ -26,25 +24,33 @@ import lombok.ToString;
  * ===============================================================================
  * </pre>
  */
+
 @Entity(name = "authority")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Authority {
+
   @Id
   private String authCode;
+
   private String authName;
+
   private String authCreateBy;
+
   private String authCreateDate;
+
   private String authUpdateBy;
+
   private String authUpdateDate;
+
   private String authDelete;
 
   @OneToMany(mappedBy = "auth")
   Set<DisplayAuth> displayAuths = new HashSet<>();
 
-
   @OneToMany(mappedBy = "auth")
   Set<Member> members = new HashSet<>();
+
 }

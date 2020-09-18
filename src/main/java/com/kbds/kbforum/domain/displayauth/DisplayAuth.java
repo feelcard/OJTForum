@@ -13,7 +13,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 /**
  * <pre>
  * 파일명     : DisplayAuth.java
@@ -26,14 +25,17 @@ import lombok.ToString;
  * ===============================================================================
  * </pre>
  */
+
 @Entity(name = "DISPLAY_AUTH")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class DisplayAuth {
+
   @Id
   private String displayAuthId;
+
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "display_id")
   private Display display;
@@ -41,4 +43,6 @@ public class DisplayAuth {
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "auth_code")
   private Authority auth;
+
+
 }

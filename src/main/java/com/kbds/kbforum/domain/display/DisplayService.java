@@ -4,8 +4,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
 /**
  * <pre>
  * 파일명     : DisplayService.java
@@ -18,6 +16,7 @@ import org.springframework.stereotype.Service;
  * ===============================================================================
  * </pre>
  */
+
 @Service
 public class DisplayService {
 
@@ -25,13 +24,15 @@ public class DisplayService {
   DisplayRepository displayRepository;
 
   public void add(Display display) {
-    // System.out.println(" displayserviceimpl display insert : " + display.toString());
+
     displayRepository.save(display);
 
   }
 
   public List<Display> listDisplays() {
+
     return displayRepository.findAll();
+
   }
 
 }

@@ -29,26 +29,29 @@ import lombok.ToString;
  * </pre>
  */
 
-
-
-@Entity(name = "FOURM")
+@Entity(name = "FORUM")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Forum {
+
   @Id
   private String forumId;
+
   private String forumField;
   private String forumTitle;
+
   private String forumCreateDate;
+
   private String forumCreateBy;
+
   private String forumUpdateDate;
+
   private String forumUpdateBy;
 
   @ManyToOne
   @JoinColumn(name = "member_id")
-  // ���� �������� �ٸ������ 1�� (�� ��ü�� �ҷ��ö� ���������)
   private Member member;
 
 
@@ -59,10 +62,4 @@ public class Forum {
   @OneToMany(mappedBy = "forum", fetch = FetchType.EAGER)
   private Set<Reply> replys = new HashSet<Reply>();
 
-
-
-  // void foo(){
-  // member.getSubsi().getSubsiId();
-  // }
-  // }
 }

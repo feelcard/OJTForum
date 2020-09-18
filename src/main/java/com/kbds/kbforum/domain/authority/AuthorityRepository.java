@@ -2,8 +2,6 @@ package com.kbds.kbforum.domain.authority;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
-
 /**
  * <pre>
  * 파일명     : AuthorityRepository.java
@@ -17,8 +15,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * </pre>
  */
 
-
 public interface AuthorityRepository extends JpaRepository<Authority, String> {
+
+  // 권한코드를 통한검색
   Authority findByAuthCode(String authCode);
 
 }

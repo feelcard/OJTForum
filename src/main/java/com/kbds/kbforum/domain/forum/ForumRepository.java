@@ -2,7 +2,6 @@ package com.kbds.kbforum.domain.forum;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
 /**
  * <pre>
  * 파일명     : ForumRepository.java
@@ -15,7 +14,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * =======================================================================================
  * </pre>
  */
-
 
 public interface ForumRepository extends JpaRepository<Forum, String> {
 

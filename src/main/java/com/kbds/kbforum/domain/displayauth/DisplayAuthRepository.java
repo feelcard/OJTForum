@@ -2,8 +2,6 @@ package com.kbds.kbforum.domain.displayauth;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
-
 /**
  * <pre>
  * 파일명     : DisplayAuthRepository.java
@@ -16,6 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * ===============================================================================
  * </pre>
  */
+
 public interface DisplayAuthRepository extends JpaRepository<DisplayAuth, String> {
 
 }

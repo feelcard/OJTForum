@@ -4,7 +4,6 @@ package com.kbds.kbforum.domain.member;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -19,8 +18,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
-
 /**
  * <pre>
  * 파일명     : Member.java
@@ -33,26 +30,27 @@ import lombok.ToString;
  * ===============================================================================
  * </pre>
  */
+
 @Entity(name = "MEMBER")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Member {
+
   @Id
-  @Column
   private String memberId;
-  @Column
+
   private String memberPassword;
-  @Column
+
   private String memberName;
-  @Column
+
   private String memberCreateDate;
-  @Column
+
   private String memberUpdateBy;
-  @Column
+
   private String memberUpdateDate;
-  @Column
+
   private String memberDelete;
 
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -65,4 +63,5 @@ public class Member {
 
   @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
   private Set<Reply> replys = new HashSet<Reply>();
+
 }

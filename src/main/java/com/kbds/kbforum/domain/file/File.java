@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 /**
  * <pre>
  * 파일명     : File.java
@@ -24,21 +23,26 @@ import lombok.ToString;
  * </pre>
  */
 
-
 @Entity(name = "FILE")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class File {
+
   @Id
   private String fileId;
+
   private String filePath;
+
   private String fileSize;
+
   private String fileCreateDate;
+
   private String fileType;
 
   @ManyToOne
   @JoinColumn(name = "forum_id")
   private Forum forum;
+
 }

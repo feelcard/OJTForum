@@ -10,6 +10,9 @@ public class AuthorityService {
   AuthorityRepository authorityRepository;
 
   public Authority getAuth(String authCode) {
+
     return authorityRepository.findByAuthCode(authCode);
-  };
+
+  }
+
 }

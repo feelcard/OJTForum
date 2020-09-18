@@ -29,13 +29,12 @@ import com.kbds.kbforum.domain.subsidiary.SubsidiaryService;
  */
 @Controller
 public class MemberResource {
+
   @Autowired
   MemberService memberService;
   @Autowired
   SubsidiaryService subsidiaryService;
-  @Autowired
   AuthorityService authorityService;
-
 
 
   @PostMapping("/register-processing")

@@ -13,7 +13,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 /**
  * <pre>
  * 파일명     : Display.java
@@ -27,7 +26,6 @@ import lombok.ToString;
  * </pre>
  */
 
-
 @Entity(name = "DISPLAY")
 @Data
 @NoArgsConstructor
@@ -36,20 +34,25 @@ import lombok.ToString;
 public class Display {
 
   @Id
-  // @GeneratedValue(generator = "UUID")
-  // @GenericGenerator( name = "UUID",
   private String displayId;
+
   private String displayName;
+
   private String displayStatus;
+
   private String displayUrl;
+
   private String displayCreateBy;
+
   private String displayCreateDate;
+
   private String displayUpdateBy;
+
   private String displayUpdateDate;
+
   private String displayDelete;
 
   @OneToMany(mappedBy = "display", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<DisplayAuth> displayAuths = new HashSet<>();
-
 
 }

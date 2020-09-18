@@ -11,7 +11,6 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
-
 /**
  * <pre>
  * 파일명     : WebApplicationInit.java
@@ -24,31 +23,33 @@ import org.springframework.web.servlet.DispatcherServlet;
  * ===============================================================================
  * </pre>
  */
+
 public class WebApplicationInit implements WebApplicationInitializer {
 
   @Override
   public void onStartup(ServletContext servletContext) throws ServletException {
+
     AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+
     context.setConfigLocation("com.kbds.kbforum.core");
+
     ServletRegistration.Dynamic dispatcher =
         servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
+
     dispatcher.setLoadOnStartup(1);
+
     dispatcher.addMapping("/");
 
-
-    System.out.println("dispatcher setted");
-    // ���ڵ� ���� ����
     FilterRegistration.Dynamic charaterEncodingFilter =
         servletContext.addFilter("charaterEncodingFilter", new CharacterEncodingFilter());
+
     charaterEncodingFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true,
         "/*");
-    charaterEncodingFilter.setInitParameter("encoding", "UTF-8");
-    charaterEncodingFilter.setInitParameter("forceEncoding", "true");
-    System.out.println("charaterEncodingFilter setted");
 
+    charaterEncodingFilter.setInitParameter("encoding", "UTF-8");
+
+    charaterEncodingFilter.setInitParameter("forceEncoding", "true");
 
   }
-
-
 
 }

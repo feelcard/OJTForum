@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 /**
  * <pre>
  * 파일명     : MemberService.java
@@ -28,32 +27,41 @@ import org.springframework.stereotype.Service;
  * ===================================================================================
  * </pre>
  */
+
 @Service
 public class MemberService implements UserDetailsService {
 
   @Autowired
   MemberRepository memberRepository;
 
-
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
     Optional<Member> memberEntityWrapper = memberRepository.findByMemberId(username);
+
     Member memberEntity = memberEntityWrapper.orElse(null);
+
     List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
     authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
 
     return new User(memberEntity.getMemberId(), memberEntity.getMemberPassword(), authorities);
+
   }
 
   @Transactional
   public void save(Member memberTO) {
+
     Member member = memberTO;
+
     member.setMemberCreateDate(LocalDateTime.now().toString());
+
     member.setMemberDelete("N");
-    // 비밀번호 암호화
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();// 비밀번호 암호화
+
     member.setMemberPassword(passwordEncoder.encode(member.getMemberPassword()));
+
     memberRepository.save(member);
   }
 

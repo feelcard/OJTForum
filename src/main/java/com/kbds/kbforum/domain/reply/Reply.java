@@ -15,7 +15,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 /**
  * <pre>
  * 파일명     : Reply.java
@@ -29,19 +28,24 @@ import lombok.ToString;
  * </pre>
  */
 
-
 @Entity(name = "REPLY")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Reply {
+
   @Id
   private String replyId;
+
   private String replyField;
+
   private String replyUpdateDate;
+
   private String replyUpdateBy;
+
   private String replyCreateDate;
+
   private String replyCreateBy;
 
   @ManyToOne
@@ -58,4 +62,5 @@ public class Reply {
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
   private Set<Reply> childReplys = new HashSet<Reply>();
+
 }

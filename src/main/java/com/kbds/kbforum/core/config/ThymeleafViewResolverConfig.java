@@ -15,8 +15,6 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
-
-
 /**
  * <pre>
  * 파일명     : ThymeleafViewResolverConfig.java
@@ -29,14 +27,10 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
  * ===============================================================================
  * </pre>
  */
+
 @Configuration
 @EnableWebMvc
 public class ThymeleafViewResolverConfig {
-
-  ThymeleafViewResolverConfig() {
-    super();
-    System.out.println("ThymeleafViewResolverConfig created");
-  }
 
   @Autowired
   private ApplicationContext applicationContext;
@@ -50,8 +44,11 @@ public class ThymeleafViewResolverConfig {
     resolver.setPrefix("/WEB-INF/templates/");
 
     resolver.setSuffix(".html");
+
     resolver.setCharacterEncoding("UTF-8");
+
     resolver.setTemplateMode(TemplateMode.HTML);
+
     resolver.setCacheable(false);
 
     return resolver;
