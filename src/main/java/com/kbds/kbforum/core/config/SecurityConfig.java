@@ -58,7 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         .usernameParameter("email").passwordParameter("password").failureUrl("/login").permitAll()
 
-
         .and()
 
         .httpBasic();

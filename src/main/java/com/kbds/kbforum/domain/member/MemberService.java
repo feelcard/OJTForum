@@ -42,8 +42,8 @@ public class MemberService implements UserDetailsService {
     Member memberEntity = memberEntityWrapper.orElse(null);
 
     List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-
-    authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
+    if (memberEntity.getAuth().equals("USER"))
+      authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
 
     return new User(memberEntity.getMemberId(), memberEntity.getMemberPassword(), authorities);
 
