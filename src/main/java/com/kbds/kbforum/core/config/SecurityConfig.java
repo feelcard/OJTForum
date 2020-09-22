@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.kbds.kbforum.domain.member.MemberService;
 
 
 
@@ -32,12 +31,12 @@ import com.kbds.kbforum.domain.member.MemberService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
-  MemberService memberService;
+  CustomAuthenticationProvider customAuthenticationProvider;
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-    auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+    auth.authenticationProvider(customAuthenticationProvider);
+    // auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
 
   }
 
@@ -46,7 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // ================login================
     http.authorizeRequests()
 
-        .antMatchers("/admin", "/user_info").authenticated()
+        .antMatchers("/admin").authenticated()
+
+        .antMatchers("/user_info").hasRole("MEMBER")
 
         .antMatchers("/home").permitAll()
 
@@ -54,9 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         .formLogin()
 
-        .loginPage("/login").loginProcessingUrl("/login-processing").defaultSuccessUrl("/")
+        .loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/")
 
-        .usernameParameter("email").passwordParameter("password").failureUrl("/login").permitAll()
+        .usernameParameter("id").passwordParameter("password").failureUrl("/login").permitAll()
 
         .and()
 

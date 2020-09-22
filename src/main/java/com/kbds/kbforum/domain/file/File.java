@@ -8,7 +8,6 @@ import com.kbds.kbforum.domain.forum.Forum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * <pre>
@@ -27,7 +26,6 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class File {
 
   @Id

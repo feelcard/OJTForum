@@ -11,7 +11,6 @@ import com.kbds.kbforum.domain.display.Display;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * <pre>
@@ -30,7 +29,6 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class DisplayAuth {
 
   @Id
@@ -43,6 +41,7 @@ public class DisplayAuth {
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "auth_code")
   private Authority auth;
+
 
 
 }

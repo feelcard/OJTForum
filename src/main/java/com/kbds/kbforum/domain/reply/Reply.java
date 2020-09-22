@@ -13,7 +13,6 @@ import com.kbds.kbforum.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * <pre>
@@ -32,7 +31,6 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Reply {
 
   @Id

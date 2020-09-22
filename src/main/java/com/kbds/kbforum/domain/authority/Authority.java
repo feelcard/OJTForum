@@ -8,8 +8,9 @@ import javax.persistence.OneToMany;
 import com.kbds.kbforum.domain.displayauth.DisplayAuth;
 import com.kbds.kbforum.domain.member.Member;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -26,10 +27,11 @@ import lombok.ToString;
  */
 
 @Entity(name = "authority")
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = {"members", "displayAuths"})
 public class Authority {
 
   @Id
@@ -52,5 +54,121 @@ public class Authority {
 
   @OneToMany(mappedBy = "auth")
   Set<Member> members = new HashSet<>();
+
+  @Override
+  public int hashCode() {
+
+    final int prime = 31;
+
+    int result = 1;
+
+    result = prime * result + ((authCode == null) ? 0 : authCode.hashCode());
+
+    result = prime * result + ((authCreateBy == null) ? 0 : authCreateBy.hashCode());
+
+    result = prime * result + ((authCreateDate == null) ? 0 : authCreateDate.hashCode());
+
+    result = prime * result + ((authDelete == null) ? 0 : authDelete.hashCode());
+
+    result = prime * result + ((authName == null) ? 0 : authName.hashCode());
+
+    result = prime * result + ((authUpdateBy == null) ? 0 : authUpdateBy.hashCode());
+
+    result = prime * result + ((authUpdateDate == null) ? 0 : authUpdateDate.hashCode());
+
+    return result;
+
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj)
+
+      return true;
+
+    if (obj == null)
+
+      return false;
+
+    if (getClass() != obj.getClass())
+
+      return false;
+
+    Authority other = (Authority) obj;
+
+    if (authCode == null) {
+
+      if (other.authCode != null)
+
+        return false;
+
+    } else if (!authCode.equals(other.authCode))
+
+      return false;
+
+    if (authCreateBy == null) {
+
+      if (other.authCreateBy != null)
+
+        return false;
+
+    } else if (!authCreateBy.equals(other.authCreateBy))
+
+      return false;
+
+    if (authCreateDate == null) {
+
+      if (other.authCreateDate != null)
+
+        return false;
+
+    } else if (!authCreateDate.equals(other.authCreateDate))
+
+      return false;
+
+    if (authDelete == null) {
+
+      if (other.authDelete != null)
+
+        return false;
+
+    } else if (!authDelete.equals(other.authDelete))
+
+      return false;
+
+    if (authName == null) {
+
+      if (other.authName != null)
+
+        return false;
+
+    } else if (!authName.equals(other.authName))
+
+      return false;
+
+    if (authUpdateBy == null) {
+
+      if (other.authUpdateBy != null)
+
+        return false;
+
+    } else if (!authUpdateBy.equals(other.authUpdateBy))
+
+      return false;
+
+    if (authUpdateDate == null) {
+
+      if (other.authUpdateDate != null)
+
+        return false;
+
+    } else if (!authUpdateDate.equals(other.authUpdateDate))
+
+      return false;
+
+    return true;
+
+  }
 
 }

@@ -11,7 +11,6 @@ import com.kbds.kbforum.domain.displayauth.DisplayAuth;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * <pre>
@@ -30,7 +29,6 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Display {
 
   @Id

@@ -135,14 +135,15 @@ body {
 		<div class="form">
 
 			<form class="register-form" action="#"
-				th:action="@{/register-processing}" th:object="${member}"
+				th:action="@{/member}" th:object="${member}"
 				method="post">
 				<input type="text" placeholder="id" th:field="*{memberId}" /> <select
 					name="subsiName">
 					<option th:each="subsiList : ${subsiList}"
 						th:value="${subsiList.subsiName}" th:text="${subsiList.subsiName}">
 					</option>
-				</select> <input type="password" placeholder="password"
+				</select> 
+				<input type="password" placeholder="password"
 					th:field="*{memberPassword}" /> <input type="text"
 					placeholder="name" th:field="*{memberName}" />
 				<button>create</button>

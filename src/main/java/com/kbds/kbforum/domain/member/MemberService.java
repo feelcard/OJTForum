@@ -8,12 +8,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.kbds.kbforum.domain.authority.AuthorityRepository;
 
 /**
  * <pre>
@@ -33,36 +33,58 @@ public class MemberService implements UserDetailsService {
 
   @Autowired
   MemberRepository memberRepository;
+  @Autowired
+  AuthorityRepository authorityRepository;
 
+  @Transactional
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
     Optional<Member> memberEntityWrapper = memberRepository.findByMemberId(username);
 
     Member memberEntity = memberEntityWrapper.orElse(null);
 
     List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-    if (memberEntity.getAuth().equals("USER"))
-      authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
 
-    return new User(memberEntity.getMemberId(), memberEntity.getMemberPassword(), authorities);
+    if (memberEntity.getAuth().getAuthCode().equals("USER"))
+
+      authorities.add(new SimpleGrantedAuthority("MEMBER"));
+
+    return new MemberDTO(memberEntity.getMemberId(), memberEntity.getMemberPassword(),
+        memberEntity.getMemberName(), memberEntity.getSubsi());
 
   }
 
-  @Transactional
-  public void save(Member memberTO) {
 
-    Member member = memberTO;
+  @Transactional
+  public void save(MemberDTO memberDTO) {
+    Member member = new Member();
+
+    member.setMemberId(memberDTO.getUsername());
 
     member.setMemberCreateDate(LocalDateTime.now().toString());
 
     member.setMemberDelete("N");
 
+    member.setMemberName(memberDTO.getMemberName());
+
+    member.setSubsi(memberDTO.getSubsi());
+
+    member.setAuth(authorityRepository.findByAuthCode("USER"));
+
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();// 비밀번호 암호화
 
-    member.setMemberPassword(passwordEncoder.encode(member.getMemberPassword()));
+    member.setMemberPassword(passwordEncoder.encode(memberDTO.getPassword()));
+
+    System.out.println(member.toString());
 
     memberRepository.save(member);
+
+  }
+
+  public boolean checkID(MemberDTO memberDTO) {
+
+    return memberRepository.exists(memberDTO.getUsername());
+
   }
 
 }
