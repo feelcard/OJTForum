@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.kbds.kbforum.domain.authority.AuthorityService;
 import com.kbds.kbforum.domain.member.MemberDTO;
@@ -28,6 +29,7 @@ import com.kbds.kbforum.domain.subsidiary.SubsidiaryService;
  */
 
 @Controller
+@RequestMapping("/member")
 public class MemberResource {
 
   @Autowired
@@ -38,7 +40,7 @@ public class MemberResource {
   AuthorityService authorityService;
 
 
-  @PostMapping("/member")
+  @PostMapping
   public ModelAndView registerProcessingMember(ModelAndView mv,
       @ModelAttribute("member") MemberDTO memberDTO, String subsiName) {
 
@@ -52,7 +54,7 @@ public class MemberResource {
     return mv;
   }
 
-  @GetMapping("/member")
+  @GetMapping
   public ModelAndView registerMove(ModelAndView mv, @ModelAttribute("member") MemberDTO memberDTO,
       @ModelAttribute("subsiName") String subsiName) {
 
@@ -66,41 +68,15 @@ public class MemberResource {
 
   }
 
-  @GetMapping("/")
-  public ModelAndView mainPage(ModelAndView mv) {
-
-    mv.setViewName("pages/home");
-
-    return mv;
-
-  }
-
-  @GetMapping("/home")
-  public ModelAndView homePage(ModelAndView mv) {
-
-    mv.setViewName("pages/home");
-
-    return mv;
-
-  }
-
   @Secured("MEMBER")
   @GetMapping("/user_info")
   public ModelAndView userInfoPage(ModelAndView mv) {
 
-    mv.setViewName("pages/user_info");
+    mv.setViewName("pages/member/user_info");
 
     return mv;
 
   }
 
-  @GetMapping("/subsiList")
-  public ModelAndView subsiList(ModelAndView mv) {
-
-    mv.setViewName("pages/login");
-
-    return mv;
-
-  }
 
 }

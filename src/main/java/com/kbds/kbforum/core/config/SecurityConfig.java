@@ -35,8 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
     auth.authenticationProvider(customAuthenticationProvider);
-    // auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+    // auth.userDetailsService(memberService).passwordEncoder(passwordEncoder()); (해당 문장은
+    // DaoAuthenticationProvider 사용)
+
 
   }
 
@@ -45,11 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // ================login================
     http.authorizeRequests()
 
-        .antMatchers("/admin").authenticated()
+        .antMatchers("/**").authenticated()
 
-        .antMatchers("/user_info").hasRole("MEMBER")
+        .antMatchers("/member/**").hasRole("MEMBER")
 
-        .antMatchers("/home").permitAll()
+        .antMatchers("/admin/**").hasRole("ADMIN")
+
+        .anyRequest().permitAll()
 
         .and()
 
