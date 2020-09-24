@@ -34,7 +34,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement(proxyTargetClass = true)
-@EnableJpaRepositories(basePackages = {"com.kbds.kbforum.domain.*"})
+@EnableJpaRepositories(basePackages = {"com.kbds.kbforum.*"})
 @ComponentScan(basePackages = "com.kbds.kbforum.core")
 public class HibernateConfig {
 
@@ -72,11 +72,13 @@ public class HibernateConfig {
 
     em.setDataSource(getDataSource());
 
-    em.setPackagesToScan(new String[] {"com.kbds.kbforum.domain"});
+    em.setPackagesToScan(new String[] {"com.kbds.kbforum"});
 
     JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
     em.setJpaVendorAdapter(vendorAdapter);
+
+    // em.setSharedCacheMode(SharedCacheMode.ENABLE_SELECTIVE);
 
     Properties props = new Properties();
 

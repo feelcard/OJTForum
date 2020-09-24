@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import com.kbds.kbforum.domain.forum.entity.Forum;
-import com.kbds.kbforum.domain.member.entity.Member;
+import com.kbds.kbforum.userstructure.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

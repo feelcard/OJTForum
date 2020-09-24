@@ -1,5 +1,6 @@
 package com.kbds.kbforum.core.config.security;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,8 +11,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-
+import com.kbds.kbforum.userstructure.authority.mapper.AuthorityRepository;
+import com.kbds.kbforum.userstructure.display.mapper.DisplayRepository;
+import com.kbds.kbforum.userstructure.displayauth.entity.DisplayAuth;
+import com.kbds.kbforum.userstructure.displayauth.mapper.DisplayAuthRepository;
 
 /**
  * <pre>
@@ -40,6 +43,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
   @Autowired
+  AuthorityRepository authorityRepository;
+
+  @Autowired
+  DisplayRepository displayRepository;
+
+  @Autowired
+  DisplayAuthRepository displayAuthRepository;
+
+  @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
     auth.authenticationProvider(customAuthenticationProvider);
@@ -49,14 +61,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   }
 
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     // ================login================
+    List<DisplayAuth> displayAuthList = displayAuthRepository.findAll();
+    // 등록된 권한 및 화면 목록을 가져와서 등록한다.
+    if (displayAuthList != null)
+      for (DisplayAuth displayAuth : displayAuthList) {
+
+        http.authorizeRequests().antMatchers(displayAuth.getDisplay().getDisplayUrl())
+            .hasRole(displayAuth.getAuth().getAuthCode());
+
+      }
+
     http.authorizeRequests()
 
-        .antMatchers("/member/**").hasRole("MEMBER")
+        .antMatchers("/member/member_info")
+
+        .hasRole("MEMBER")
 
         .antMatchers("/admin/**").hasRole("ADMIN")
+
+        .antMatchers("/member").anonymous()
 
         .anyRequest().authenticated()
 

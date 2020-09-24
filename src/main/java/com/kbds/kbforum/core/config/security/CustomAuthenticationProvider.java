@@ -11,7 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import com.kbds.kbforum.domain.member.service.MemberService;
+import com.kbds.kbforum.userstructure.member.service.MemberService;
 
 /**
  * <pre>
@@ -57,14 +57,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     // if (!loadedUser.isAccountNonExpired()) {
     // throw new AccountExpiredException("User account has expired");
     // }
-    System.out.println("권한 : " + loadedUser.getAuthorities());
 
     /* 실질적인 인증 */ if (!passwordEncoder.matches(password, loadedUser.getPassword())) {
       throw new BadCredentialsException("암호가 일치하지 않습니다. 다시확인해 주십시오.");
     }
+
     // /* checker */ if (!loadedUser.isCredentialsNonExpired()) {
     // throw new CredentialsExpiredException("User credentials have expired");
     // }
+
     /* 인증 완료 */ UsernamePasswordAuthenticationToken result =
         new UsernamePasswordAuthenticationToken(loadedUser, null, loadedUser.getAuthorities());
     result.setDetails(authentication.getDetails());
