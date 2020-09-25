@@ -1,11 +1,13 @@
 package com.kbds.kbforum.userstructure.subsidiary.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
+import com.kbds.kbforum.userstructure.subsidiary.dto.SubsidiaryDTO;
 import com.kbds.kbforum.userstructure.subsidiary.entity.Subsidiary;
 import com.kbds.kbforum.userstructure.subsidiary.mapper.SubsidiaryRepository;
 
@@ -29,15 +31,26 @@ public class SubsidiaryService {
   @Autowired
   SubsidiaryRepository subsidiaryRepository;
 
-  @Cacheable(cacheNames = "subsidiaryList")
-  public List<Subsidiary> getAllList() {
+  @Cacheable(cacheNames = "subsiCache")
+  public List<SubsidiaryDTO> getAllList() {
 
-    return subsidiaryRepository.findAll();
+    List<Subsidiary> subsiList = subsidiaryRepository.findAll();
+
+    List<SubsidiaryDTO> subsiNameList = new ArrayList<>();
+
+    for (Subsidiary subsi : subsiList) {
+
+      subsiNameList.add(new SubsidiaryDTO(subsi.getSubsiId(), subsi.getSubsiName()));
+
+    }
+
+    return subsiNameList;
 
   }
 
-  @Caching(evict = {@CacheEvict(cacheNames = "subsidiaryList", allEntries = true)})
-  public void removeCacheUsers() {}
+  @Caching(evict = {@CacheEvict(cacheNames = "subsiCache", allEntries = true)})
+  public void removeSubsiCache() {}
+
 
   public Subsidiary getSubsiByName(String subsiName) {
 

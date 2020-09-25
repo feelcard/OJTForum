@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kbds.kbforum.userstructure.authority.service.AuthorityService;
 import com.kbds.kbforum.userstructure.member.dto.MemberDTO;
 import com.kbds.kbforum.userstructure.member.service.MemberService;
-import com.kbds.kbforum.userstructure.subsidiary.entity.Subsidiary;
+import com.kbds.kbforum.userstructure.subsidiary.dto.SubsidiaryDTO;
 import com.kbds.kbforum.userstructure.subsidiary.service.SubsidiaryService;
 
 /**
@@ -42,7 +42,7 @@ public class MemberResource {
   public ModelAndView registerMove(ModelAndView mv, @ModelAttribute("member") MemberDTO memberDTO,
       @ModelAttribute("subsiName") String subsiName) {
 
-    List<Subsidiary> subsiList = subsidiaryService.getAllList();
+    List<SubsidiaryDTO> subsiList = subsidiaryService.getAllList();
 
     mv.addObject("subsiList", subsiList);
 
