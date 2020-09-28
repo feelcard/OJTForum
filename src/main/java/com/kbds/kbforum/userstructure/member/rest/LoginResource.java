@@ -42,7 +42,7 @@ public class LoginResource {
 
   }
 
-  @GetMapping("/error/{message:+.}")
+  @GetMapping("/error/{message}")
   public ModelAndView loginError(ModelAndView mv, @PathVariable String message,
       HttpServletRequest request) {
 

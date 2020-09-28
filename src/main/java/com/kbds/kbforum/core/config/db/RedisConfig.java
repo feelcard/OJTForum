@@ -74,6 +74,7 @@ public class RedisConfig {
 
     expires.put("referenceData", (long) 86400);
 
+
     redisCacheManager.setExpires(expires);
 
     return redisCacheManager;

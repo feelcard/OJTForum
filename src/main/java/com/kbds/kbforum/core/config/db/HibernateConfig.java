@@ -1,6 +1,7 @@
 package com.kbds.kbforum.core.config.db;
 
 import java.util.Properties;
+import javax.persistence.SharedCacheMode;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,8 @@ public class HibernateConfig {
 
     LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 
+    em.setSharedCacheMode(SharedCacheMode.ENABLE_SELECTIVE);
+
     em.setDataSource(getDataSource());
 
     em.setPackagesToScan(new String[] {"com.kbds.kbforum"});
@@ -78,11 +81,12 @@ public class HibernateConfig {
 
     em.setJpaVendorAdapter(vendorAdapter);
 
-    // em.setSharedCacheMode(SharedCacheMode.ENABLE_SELECTIVE);
-
     Properties props = new Properties();
 
     props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+
+    props.put("hibernate.cache.use_second_level_cache",
+        env.getProperty("hibernate.cache.use_second_level_cache"));
 
     props.put("hibernate.physical_naming_strategy",
         env.getProperty("hibernate.physical_naming_strategy"));

@@ -31,7 +31,7 @@ public class SubsidiaryService {
   @Autowired
   SubsidiaryRepository subsidiaryRepository;
 
-  @Cacheable(cacheNames = "subsiCache")
+  @Cacheable("subsiCache")
   public List<SubsidiaryDTO> getAllList() {
 
     List<Subsidiary> subsiList = subsidiaryRepository.findAll();
