@@ -1,7 +1,6 @@
 package com.kbds.kbforum.core.config.db;
 
 import java.util.Properties;
-import javax.persistence.SharedCacheMode;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,8 +69,6 @@ public class HibernateConfig {
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
     LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-
-    em.setSharedCacheMode(SharedCacheMode.ENABLE_SELECTIVE);
 
     em.setDataSource(getDataSource());
 

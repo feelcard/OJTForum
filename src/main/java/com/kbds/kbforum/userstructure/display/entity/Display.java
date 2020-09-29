@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import com.kbds.kbforum.userstructure.displayauth.entity.DisplayAuth;
@@ -50,7 +49,7 @@ public class Display {
 
   private String displayDelete;
 
-  @OneToMany(mappedBy = "display", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "display", cascade = CascadeType.ALL)
   private Set<DisplayAuth> displayAuths = new HashSet<>();
 
 }

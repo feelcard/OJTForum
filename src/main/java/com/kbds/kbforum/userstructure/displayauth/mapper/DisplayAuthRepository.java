@@ -1,6 +1,8 @@
 package com.kbds.kbforum.userstructure.displayauth.mapper;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.kbds.kbforum.userstructure.authority.entity.Authority;
 import com.kbds.kbforum.userstructure.displayauth.entity.DisplayAuth;
 
 /**
@@ -17,5 +19,8 @@ import com.kbds.kbforum.userstructure.displayauth.entity.DisplayAuth;
  */
 
 public interface DisplayAuthRepository extends JpaRepository<DisplayAuth, String> {
+
+  List<DisplayAuth> findByAuth(Authority auth);
+
 
 }

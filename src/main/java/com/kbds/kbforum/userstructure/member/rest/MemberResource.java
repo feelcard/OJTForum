@@ -68,7 +68,7 @@ public class MemberResource {
     return mv;
   }
 
-  @GetMapping("/member_info")
+  @GetMapping("/info")
   public ModelAndView userInfoPage(ModelAndView mv) {
 
     mv.setViewName("pages/member/member_info");
