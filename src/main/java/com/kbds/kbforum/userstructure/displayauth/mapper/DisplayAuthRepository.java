@@ -22,5 +22,4 @@ public interface DisplayAuthRepository extends JpaRepository<DisplayAuth, String
 
   List<DisplayAuth> findByAuth(Authority auth);
 
-
 }

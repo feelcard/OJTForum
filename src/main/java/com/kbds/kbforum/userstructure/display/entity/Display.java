@@ -52,4 +52,15 @@ public class Display {
   @OneToMany(mappedBy = "display", cascade = CascadeType.ALL)
   private Set<DisplayAuth> displayAuths = new HashSet<>();
 
+  @Override
+  public String toString() {
+    return "Display [displayId=" + displayId + ", displayName=" + displayName + ", displayStatus="
+        + displayStatus + ", displayUrl=" + displayUrl + ", displayCreateBy=" + displayCreateBy
+        + ", displayCreateDate=" + displayCreateDate + ", displayUpdateBy=" + displayUpdateBy
+        + ", displayUpdateDate=" + displayUpdateDate + ", displayDelete=" + displayDelete
+        +  "]";
+  }
+  
+  
+
 }

@@ -53,14 +53,20 @@ public class MemberService implements UserDetailsService {
     List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
     if (memberEntity.getAuth().getAuthCode().equals("MEMBER")) {
-
+      System.out.println("member authority authorized");
       authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
 
     }
 
-    else {
-
+    else if (memberEntity.getAuth().getAuthCode().equals("ADMIN")) {
+      System.out.println("admin authority authorized");
       authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
+    }
+
+    else {
+      System.out.println("ANONYMOUS authority authorized");
+      authorities.add(new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
 
     }
 

@@ -75,13 +75,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     http.authorizeRequests()
 
-        // .antMatchers("/member/member_info")
-        //
-        // .hasRole("MEMBER")
-
         .antMatchers("/admin/**").hasRole("ADMIN")
 
-        .antMatchers("/member").permitAll()
+        .antMatchers("/member", "/").permitAll()// .anonymous()
 
         .anyRequest().access("@authorizationChecker.check(request, authentication)")
 

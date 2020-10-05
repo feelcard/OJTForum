@@ -9,8 +9,10 @@ import javax.persistence.ManyToOne;
 import com.kbds.kbforum.userstructure.authority.entity.Authority;
 import com.kbds.kbforum.userstructure.display.entity.Display;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <pre>
@@ -26,21 +28,48 @@ import lombok.NoArgsConstructor;
  */
 
 @Entity(name = "DISPLAY_AUTH")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class DisplayAuth {
 
   @Id
   private String displayAuthId;
 
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "display_id")
   private Display display;
 
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "auth_code")
   private Authority auth;
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((displayAuthId == null) ? 0 : displayAuthId.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    DisplayAuth other = (DisplayAuth) obj;
+    if (displayAuthId == null) {
+      if (other.displayAuthId != null)
+        return false;
+    } else if (!displayAuthId.equals(other.displayAuthId))
+      return false;
+    return true;
+  }
 
 
 
