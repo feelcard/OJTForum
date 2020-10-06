@@ -31,7 +31,7 @@ public class SubsidiaryService {
   @Autowired
   SubsidiaryRepository subsidiaryRepository;
 
-  @Cacheable("subsiCache")
+  @Cacheable(value = "subsiCache")
   public List<SubsidiaryDTO> getAllList() {
 
     List<Subsidiary> subsiList = subsidiaryRepository.findAll();
@@ -48,7 +48,7 @@ public class SubsidiaryService {
 
   }
 
-  @Caching(evict = {@CacheEvict(cacheNames = "subsiCache", allEntries = true)})
+  @Caching(evict = {@CacheEvict(value = "subsiCache", allEntries = true)})
   public void removeSubsiCache() {}
 
 

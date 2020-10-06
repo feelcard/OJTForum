@@ -13,6 +13,20 @@ import com.kbds.kbforum.userstructure.member.dto.MemberDTO;
 import com.kbds.kbforum.userstructure.member.entity.Member;
 import com.kbds.kbforum.userstructure.member.mapper.MemberRepository;
 
+
+/**
+ * <pre>
+ * 파일명     : AuthorizationChecker.java
+ * 프로젝트  : OJTForum
+ * 날짜        : 2020. 10. 5.
+ * ===========================================================================
+ * 			날짜	      		|    	작성자		|	              내	용	         |	  
+ * ===========================================================================
+ * 	     2020. 10. 5.       |	     유한솔                 | 페이지 접근시 권한 체크를 위한 클래스 |	
+ * ===========================================================================
+ * </pre>
+ */
+
 @Component
 public class AuthorizationChecker {
   @Autowired
